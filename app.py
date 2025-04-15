@@ -27,6 +27,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    user_id = event.source.user_id
+    user_message = event.message.text
+
+    print(f"使用者 ID: {user_id}")
+    print(f"使用者說: {user_message}")
+
     incoming_msg = event.message.text
     reply_msg = f'你說了：{incoming_msg}'
     line_bot_api.reply_message(
