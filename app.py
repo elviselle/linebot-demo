@@ -135,7 +135,7 @@ def handle_follow(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
     postback_data = event.postback.data
-    print(f'接收到 postback: {postback_data}')
+    logger.info(f'接收到 postback: {postback_data}')
 
     # 可以根據 data 做不同邏輯
 #    if postback_data == 'book_haircut':
