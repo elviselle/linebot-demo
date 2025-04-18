@@ -88,7 +88,7 @@ def handle_message(event):
 
     flex_msg = FlexSendMessage(
         alt_text='這是一個Flex訊息',
-        contents=flex_message_json
+        contents=flex_message_template
     )
 
 #    reply_msg = f'你說了：{incoming_msg}'
