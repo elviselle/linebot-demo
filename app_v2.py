@@ -28,25 +28,23 @@ btn_message_template="""
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "backgroundColor": "#FFEAE0"
+        "backgroundColor": "#E3E3E3"
       },
       "body": {
         "type": "box",
         "layout": "vertical",
-        "spacing": "lg",
+        "spacing": "md",
         "contents": [
           {
             "type": "text",
             "text": "預約 - 明天",
             "weight": "bold",
-            "size": "xl",
-            "color": "#FF6F61"
+            "size": "xl"
           },
           {
             "type": "text",
             "text": "4/23 (星期三)",
             "size": "md",
-            "color": "#666666",
             "wrap": true
           },
           {
@@ -63,7 +61,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/23 10:30"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               },
               {
@@ -75,7 +72,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/23 13:00"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               },
               {
@@ -87,7 +83,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/23 15:00"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               }
             ]
@@ -103,25 +98,23 @@ btn_message_template="""
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "backgroundColor": "#FFF3E0"
+        "backgroundColor": "#E3E3E3"
       },
       "body": {
         "type": "box",
         "layout": "vertical",
-        "spacing": "lg",
+        "spacing": "md",
         "contents": [
           {
             "type": "text",
             "text": "預約 - 後天",
             "weight": "bold",
-            "size": "xl",
-            "color": "#FF6F61"
+            "size": "xl"
           },
           {
             "type": "text",
             "text": "4/24 (星期四)",
             "size": "md",
-            "color": "#666666",
             "wrap": true
           },
           {
@@ -138,7 +131,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/24 10:30"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               },
               {
@@ -150,7 +142,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/24 13:00"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               },
               {
@@ -162,7 +153,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/24 15:00"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               }
             ]
@@ -177,26 +167,23 @@ btn_message_template="""
         "url": "https://vos.line-scdn.net/bot-designer-template-images/event/sally-card.png",
         "size": "full",
         "aspectRatio": "20:13",
-        "aspectMode": "cover",
-        "backgroundColor": "#FFE4E1"
+        "aspectMode": "cover"
       },
       "body": {
         "type": "box",
         "layout": "vertical",
-        "spacing": "lg",
+        "spacing": "md",
         "contents": [
           {
             "type": "text",
             "text": "預約 - 大後天",
             "weight": "bold",
-            "size": "xl",
-            "color": "#FF6F61"
+            "size": "xl"
           },
           {
             "type": "text",
             "text": "4/25 (星期五)",
             "size": "md",
-            "color": "#666666",
             "wrap": true
           },
           {
@@ -213,7 +200,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/25 10:30"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               },
               {
@@ -225,7 +211,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/25 13:00"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               },
               {
@@ -237,7 +222,6 @@ btn_message_template="""
                   "displayText": "我要預約 4/25 15:00"
                 },
                 "style": "primary",
-                "color": "#FFAA88",
                 "height": "md"
               }
             ]
