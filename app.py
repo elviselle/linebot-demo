@@ -1,11 +1,12 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, FollowEvent, TextMessage, TextSendMessage, FlexSendMessage
+from linebot.models import MessageEvent, FollowEvent, TextMessage, TextSendMessage, TemplateSendMessage
 import os
 import requests
 #from bs4 import BeautifulSoup
 import logging
+import json
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET')
 RASA_BOT_IP = os.getenv('RASA_BOT_IP')
-flex_message_template="""{
+btn_message_template="""{
   "type": "template",
   "altText": "this is a buttons template",
   "template": {
@@ -46,6 +47,7 @@ flex_message_template="""{
     ]
   }
 }"""
+btn_msg_dict = json.loads(btn_message_template)
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
@@ -86,10 +88,7 @@ def handle_message(event):
 #        reply_msg = r.get("text")
 #        logger.info("Bot 說：" + reply_msg)
 
-    flex_msg = FlexSendMessage(
-        alt_text='這是一個Flex訊息',
-        contents=flex_message_template
-    )
+    btn_msg = TemplateSendMessage.new_from_json_dict(btn_msg_dict)
 
 #    reply_msg = f'你說了：{incoming_msg}'
 #    line_bot_api.reply_message(
@@ -97,7 +96,7 @@ def handle_message(event):
 #        TextSendMessage(text=reply_msg)
 #    )
 
-    line_bot_api.reply_message(event.reply_token, flex_msg)
+    line_bot_api.reply_message(event.reply_token, btn_msg)
 
 # 處理 follow 事件
 @handler.add(FollowEvent)
