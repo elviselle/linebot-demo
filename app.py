@@ -61,6 +61,21 @@ def handle_message(event):
         TextSendMessage(text=reply_msg)
     )
 
+# 處理 follow 事件
+@handler.add(FollowEvent)
+def handle_follow(event):
+    user_id = event.source.user_id
+    profile = line_bot_api.get_profile(user_id)
+    name = profile.display_name
+    picture = profile.picture_url
+
+    logger.info(f"新朋友加入！user_id: {user_id}, 名字: {name}")
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=f"{name}，歡迎你加我好友 👋")
+    )
+
 if __name__ == "__main__":
 
     app.run(host='0.0.0.0', port=5000)
