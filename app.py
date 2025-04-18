@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, FollowEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, FollowEvent, TextMessage, TextSendMessage, FlexSendMessage
 import os
 import requests
 #from bs4 import BeautifulSoup
@@ -15,6 +15,37 @@ logger = logging.getLogger(__name__)
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET')
 RASA_BOT_IP = os.getenv('RASA_BOT_IP')
+flex_message_template="""{
+  "type": "template",
+  "altText": "this is a buttons template",
+  "template": {
+    "type": "buttons",
+    "title": "Select the Reservation time",
+    "text": "Last Order : PM 9:00",
+    "actions": [
+      {
+        "type": "message",
+        "label": "PM 6:00",
+        "text": "PM 6:00"
+      },
+      {
+        "type": "message",
+        "label": "PM 7:00",
+        "text": "PM 7:00"
+      },
+      {
+        "type": "message",
+        "label": "PM 8:00",
+        "text": "PM 8:00"
+      },
+      {
+        "type": "message",
+        "label": "PM 9:00",
+        "text": "PM 9:00"
+      }
+    ]
+  }
+}"""
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
@@ -48,18 +79,25 @@ def handle_message(event):
         "message": incoming_msg             # 使用者發的訊息
     }
 
-    response = requests.post(url, json=data)
+#    response = requests.post(url, json=data)
 
-    # 顯示 Rasa 回應內容
-    for r in response.json():
-        reply_msg = r.get("text")
-        logger.info("Bot 說：" + reply_msg)
+#    # 顯示 Rasa 回應內容
+#    for r in response.json():
+#        reply_msg = r.get("text")
+#        logger.info("Bot 說：" + reply_msg)
+
+    flex_msg = FlexSendMessage(
+        alt_text='這是一個Flex訊息',
+        contents=flex_message_json
+    )
 
 #    reply_msg = f'你說了：{incoming_msg}'
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply_msg)
-    )
+#    line_bot_api.reply_message(
+#        event.reply_token,
+#        TextSendMessage(text=reply_msg)
+#    )
+
+     line_bot_api.reply_message(flex_msg)
 
 # 處理 follow 事件
 @handler.add(FollowEvent)
