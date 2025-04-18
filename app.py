@@ -32,7 +32,17 @@ btn_message_template="""
           {
             "type": "postback",
             "label": "10:30",
+            "data": "action=book&date=04-23&time=10:30"
+          },
+          {
+            "type": "postback",
+            "label": "13:00",
             "data": "action=book&date=04-23&time=13:00"
+          },
+          {
+            "type": "postback",
+            "label": "15:00",
+            "data": "action=book&date=04-23&time=15:00"
           }
         ],
         "imageBackgroundColor": "#E3E3E3"
@@ -46,6 +56,16 @@ btn_message_template="""
             "type": "postback",
             "label": "10:30",
             "data": "action=book&date=04-24&time=10:30"
+          },
+          {
+            "type": "postback",
+            "label": "13:00",
+            "data": "action=book&date=04-24&time=13:00"
+          },
+          {
+            "type": "postback",
+            "label": "15:00",
+            "data": "action=book&date=04-24&time=15:00"
           }
         ],
         "imageBackgroundColor": "#E3E3E3"
@@ -59,6 +79,16 @@ btn_message_template="""
             "type": "postback",
             "label": "10:30",
             "data": "action=book&date=04-25&time=10:30"
+          },
+          {
+            "type": "postback",
+            "label": "13:00",
+            "data": "action=book&date=04-25&time=13:00"
+          },
+          {
+            "type": "postback",
+            "label": "15:00",
+            "data": "action=book&date=04-25&time=15:00"
           }
         ]
       }
