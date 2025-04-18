@@ -97,7 +97,7 @@ def handle_message(event):
 #        TextSendMessage(text=reply_msg)
 #    )
 
-    line_bot_api.reply_message(flex_msg)
+    line_bot_api.reply_message(event.reply_token, flex_msg)
 
 # 處理 follow 事件
 @handler.add(FollowEvent)
