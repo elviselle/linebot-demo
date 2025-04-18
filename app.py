@@ -16,37 +16,56 @@ logger = logging.getLogger(__name__)
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET')
 RASA_BOT_IP = os.getenv('RASA_BOT_IP')
-btn_message_template="""{
+btn_message_template="""
+{
   "type": "template",
-  "altText": "this is a buttons template",
+  "altText": "this is a carousel template",
   "template": {
-    "type": "buttons",
-    "title": "Select the Reservation time",
-    "text": "Last Order : PM 9:00",
-    "actions": [
+    "type": "carousel",
+    "imageSize": "contain",
+    "columns": [
       {
-        "type": "message",
-        "label": "PM 6:00",
-        "text": "PM 6:00"
+        "thumbnailImageUrl": "https://vos.line-scdn.net/bot-designer-template-images/event/brown-card.png",
+        "title": "預約 - 明天",
+        "text": "4/23 (星期三)",
+        "actions": [
+          {
+            "type": "postback",
+            "label": "10:30",
+            "data": "action=book&date=04-23&time=13:00"
+          }
+        ],
+        "imageBackgroundColor": "#E3E3E3"
       },
       {
-        "type": "message",
-        "label": "PM 7:00",
-        "text": "PM 7:00"
+        "thumbnailImageUrl": "https://vos.line-scdn.net/bot-designer-template-images/event/cony-card.png",
+        "title": "預約 - 後天",
+        "text": "4/24 (星期四)",
+        "actions": [
+          {
+            "type": "postback",
+            "label": "10:30",
+            "data": "action=book&date=04-24&time=10:30"
+          }
+        ],
+        "imageBackgroundColor": "#E3E3E3"
       },
       {
-        "type": "message",
-        "label": "PM 8:00",
-        "text": "PM 8:00"
-      },
-      {
-        "type": "message",
-        "label": "PM 9:00",
-        "text": "PM 9:00"
+        "thumbnailImageUrl": "https://vos.line-scdn.net/bot-designer-template-images/event/sally-card.png",
+        "title": "預約 - 大後天",
+        "text": "4/25 (星期五)",
+        "actions": [
+          {
+            "type": "postback",
+            "label": "10:30",
+            "data": "action=book&date=04-25&time=10:30"
+          }
+        ]
       }
     ]
   }
-}"""
+}
+"""
 btn_msg_dict = json.loads(btn_message_template)
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
@@ -112,6 +131,23 @@ def handle_follow(event):
         event.reply_token,
         TextSendMessage(text=f"{name}，歡迎你加我好友 👋")
     )
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    postback_data = event.postback.data
+    print(f'接收到 postback: {postback_data}')
+
+    # 可以根據 data 做不同邏輯
+#    if postback_data == 'book_haircut':
+#        line_bot_api.reply_message(
+#            event.reply_token,
+#            TextSendMessage(text="你選擇了預約剪髮 💇‍♂️")
+#        )
+#    elif postback_data == 'check_service':
+#        line_bot_api.reply_message(
+#            event.reply_token,
+#            TextSendMessage(text="以下是我們的服務項目 💈")
+#        )
 
 if __name__ == "__main__":
 
