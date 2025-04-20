@@ -5,8 +5,11 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import os
 import requests
 from bs4 import BeautifulSoup
+import logging
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # 從環境變數讀取憑證
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
@@ -54,7 +57,10 @@ if __name__ == "__main__":
         soup = BeautifulSoup(response.text, "html.parser")
         title = soup.title.string
         print("網頁標題是：", title)
+        logger.info("網頁標題是："+title)
     else:
         print("無法取得網頁，狀態碼：", response.status_code)
+        logger.info("無法取得網頁，狀態碼："+response.status_code)
+
     app.run(host='0.0.0.0', port=5000)
 
