@@ -41,5 +41,18 @@ def handle_message(event):
     )
 
 if __name__ == "__main__":
+    # 要爬的網址
+    url = "http://34.44.29.177:8080/"
+
+    # 發送 GET 請求
+    response = requests.get(url)
+
+    # 如果成功
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, "html.parser")
+        title = soup.title.string
+        print("網頁標題是：", title)
+    else:
+        print("無法取得網頁，狀態碼：", response.status_code)
     app.run(host='0.0.0.0', port=5000)
 
