@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 # 從環境變數讀取憑證
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET')
+RASA_BOT_IP = os.getenv('RASA_BOT_IP')
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
@@ -35,32 +36,32 @@ def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
 
-    print(f"使用者 ID: {user_id}")
-    print(f"使用者說: {user_message}")
+    logger.info(f"使用者 ID: {user_id}")
+    logger.info(f"使用者說: {user_message}")
 
     incoming_msg = event.message.text
-    reply_msg = f'你說了：{incoming_msg}'
+
+    url = "http://"+RASA_BOT_IP+":5005/webhooks/rest/webhook"  # 根據你的 Rasa server 調整
+
+    data = {
+        "sender": "test_user",        # 自訂使用者 ID
+        "message": incoming_msg             # 使用者發的訊息
+    }
+
+    response = requests.post(url, json=data)
+
+    # 顯示 Rasa 回應內容
+    for r in response.json():
+        reply_msg = r.get("text")
+        logger.info("Bot 說：" + reply_msg)
+
+#    reply_msg = f'你說了：{incoming_msg}'
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=reply_msg)
     )
 
 if __name__ == "__main__":
-#    # 要爬的網址
-#    url = "http://34.44.29.177:8080/"
-
-#    # 發送 GET 請求
-#    response = requests.get(url)
-
-#    # 如果成功
-#    if response.status_code == 200:
-#        soup = BeautifulSoup(response.text, "html.parser")
-#        title = soup.title.string
-#        print("網頁標題是：", title)
-#        logger.info("網頁標題是："+title)
-#    else:
-#        print("無法取得網頁，狀態碼：", response.status_code)
-#        logger.info("無法取得網頁，狀態碼："+response.status_code)
 
     app.run(host='0.0.0.0', port=5000)
 
