@@ -5,9 +5,4 @@ services:
     buildCommand: "pip install -r requirements.txt"
     startCommand: "python app.py"
     plan: free
-    envVars:
-      - key: LINE_CHANNEL_ACCESS_TOKEN
-        value: qBIjKGF3lVQ87Xm/kr11EnaoT4HnN/4IZZtjSR22OcwFMt1uOhTSin+8u26pe4Z35xADOAWHZ0Rt2hjQ/mG2lpoeDRuYgZsXxbl1xVVqtnYY5TIzvmCBFBDbtLrY0JqNR7KP3eMRTmEjGONoAEvCCwdB04t89/1O/w1cDnyilFU=
-      - key: LINE_CHANNEL_SECRET
-        value: 2488ad16810e0abc6c0fc96d2a5b3243
 
