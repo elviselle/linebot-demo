@@ -5,7 +5,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import os
 import requests
 #from bs4 import BeautifulSoup
-#import logging
+import logging
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
