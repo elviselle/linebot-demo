@@ -89,7 +89,7 @@ def handle_postback(event):
   if postback_data.startswith('action=book'):
     parts = dict(item.split('=') for item in postback_data.split('&'))  
     google_calendar = GoogleCalendarOperation()
-    google_calendar.create_event(display_name, user_id, parts['date'], parts['time']) 
+    google_calendar.create_event(display_name, user_id, '2025-'+parts['date'], parts['time']) 
 
     # 可以根據 data 做不同邏輯
 #    if postback_data == 'book_haircut':
