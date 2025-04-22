@@ -31,7 +31,7 @@ class GoogleCalendarOperation:
     }
 
     def __init__(self):
-        SERVICE_ACCONT_KEY = os.getenv('SERVICE_ACCOUNT_KEY')
+        SERVICE_ACCONT_KEY = os.getenv('e')
         SERVICE_ACCONT_KEY += "=="
         CALENDAR_ID = os.getenv('CALENDAR_ID')
         SUBJECT_EMAIL = os.getenv('SUBJECT_EMAIL')
@@ -156,16 +156,16 @@ class GoogleCalendarOperation:
 # Initialize the GoogleCalendarOperation class
 # calendar_id = "your_calendar_id_here"  # Replace with your calendar ID
 # subject_email = "your_subject_email_here"  # Replace with your subject email if needed
-google_calendar = GoogleCalendarOperation()
+#google_calendar = GoogleCalendarOperation()
 
 # Test listing calendars
-print("Listing calendars:")
-calendars = google_calendar.list_calendars()
-for calendar in calendars:
-    print(f"Name: {calendar['summary']}, ID: {calendar['id']}")
+#print("Listing calendars:")
+#calendars = google_calendar.list_calendars()
+#for calendar in calendars:
+#    print(f"Name: {calendar['summary']}, ID: {calendar['id']}")
 
 # Test creating an event
-print("\nCreating an event:")
+#print("\nCreating an event:")
 
-created_event = google_calendar.create_event("Elvis Wang", "U1234567890", "2025-04-23", "14:00")
-print(f"Event created: {created_event.get('htmlLink')}")
+#created_event = google_calendar.create_event("Elvis Wang", "U1234567890", "2025-04-23", "14:00")
+#print(f"Event created: {created_event.get('htmlLink')}")
