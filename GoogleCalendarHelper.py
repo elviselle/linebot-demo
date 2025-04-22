@@ -90,8 +90,8 @@ class GoogleCalendarOperation:
                 
                 events_result = self.service.events().list(
                     calendarId=self.calendar_id,
-                    timeMin=start_time,
-                    timeMax=end_time,
+                    timeMin=start_time.isoformat(),
+                    timeMax=end_time.isoformat(),
                     singleEvents=True,
                     orderBy='startTime'
                 ).execute()
@@ -112,7 +112,8 @@ class GoogleCalendarOperation:
 # Initialize the GoogleCalendarOperation class
 # calendar_id = "your_calendar_id_here"  # Replace with your calendar ID
 # subject_email = "your_subject_email_here"  # Replace with your subject email if needed
-#google_calendar = GoogleCalendarOperation()
+google_calendar = GoogleCalendarOperation()
+google_calendar.get_upcoming_events()
 
 # Test listing calendars
 #print("Listing calendars:")
