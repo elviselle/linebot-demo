@@ -6,9 +6,10 @@ class LineBotMessageTemplate:
         pass
     def get_message_template(self, message_type):
         msg_dict = {}
+        
         if message_type == self.TYPE_CALENDAR_AVAILABLE_TIME:
 
-            btn_message_template="""
+            btn_message_template = """
                 {
                 "type": "carousel",
                 "contents": [
@@ -270,6 +271,6 @@ class LineBotMessageTemplate:
                 ]
                 }
                 """
-                msg_dict = json.loads(btn_message_template)    
+            msg_dict = json.loads(btn_message_template)    
 
         return msg_dict

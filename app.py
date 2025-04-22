@@ -56,7 +56,7 @@ def handle_message(event):
       
       btn_msg = FlexSendMessage(
           alt_text="預約時段選擇",
-          contents=LineBotMessageTemplate().get_flex_message()
+          contents=LineBotMessageTemplate().get_message_template(LineBotMessageTemplate.TYPE_CALENDAR_AVAILABLE_TIME)
       )
       line_bot_api.reply_message(event.reply_token, btn_msg)
 
