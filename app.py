@@ -78,8 +78,17 @@ def handle_follow(event):
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    postback_data = event.postback.data
-    logger.info(f'接收到 postback: {postback_data}')
+  user_id = event.source.user_id
+  profile = line_bot_api.get_profile(user_id)
+  display_name = profile.display_name
+
+  postback_data = event.postback.data
+  logger.info(f'接收到 postback: {postback_data}')
+
+  if postback_data.startswith('action=book'):
+    parts = dict(item.split('=') for item in postback_data.split('&'))  
+    google_calendar = GoogleCalendarOperation()
+    google_calendar.create_event(display_name, user_id, parts['date'], parts['time']) 
 
     # 可以根據 data 做不同邏輯
 #    if postback_data == 'book_haircut':
