@@ -1,8 +1,10 @@
 import json
+import os
 
 class LineBotMessageTemplate:
 
     TYPE_CALENDAR_AVAILABLE_TIME: str = "calendar_available"
+    WEBHOOD_DOMAIN = os.getenv('WEBHOOD_DOMAIN')
 
     def __init__(self):
         pass
@@ -127,7 +129,7 @@ class LineBotMessageTemplate:
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": "https://vos.line-scdn.net/bot-designer-template-images/event/cony-card.png",
+                        "url": {WEBHOOD_DOMAIN} + "/static/imgs/LJ_Salon_Banner.png",
                         "size": "full",
                         "aspectRatio": "20:13",
                         "aspectMode": "cover",
