@@ -16,7 +16,7 @@ class LineBotMessageTemplate:
     def get_message_template(self, message_type):
         msg_dict = {}
 
-        logging.info(f"webhook domain: {self.WEBHOOD_DOMAIN}")
+        # logging.info(f"webhook domain: {self.WEBHOOD_DOMAIN}")
 
         if message_type == self.TYPE_CALENDAR_AVAILABLE_TIME:
 
@@ -28,7 +28,7 @@ class LineBotMessageTemplate:
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": "https://vos.line-scdn.net/bot-designer-template-images/event/brown-card.png",
+                        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
                         "size": "full",
                         "aspectRatio": "20:13",
                         "aspectMode": "cover",
@@ -221,7 +221,7 @@ class LineBotMessageTemplate:
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": "https://vos.line-scdn.net/bot-designer-template-images/event/sally-card.png",
+                        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
                         "size": "full",
                         "aspectRatio": "20:13",
                         "aspectMode": "cover",
