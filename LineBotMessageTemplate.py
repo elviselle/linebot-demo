@@ -32,14 +32,14 @@ class LineBotMessageTemplate:
                         "contents": [
                         {
                             "type": "text",
-                            "text": "預約 - 明天",
+                            "text": "預約 - 明天(4/23 星期三)",
                             "weight": "bold",
                             "size": "xl",
                             "color": "#FF6F61"
                         },
                         {
                             "type": "text",
-                            "text": "4/23 (星期三)",
+                            "text": "可預約時段：",
                             "size": "md",
                             "color": "#666666",
                             "wrap": true
@@ -140,14 +140,14 @@ class LineBotMessageTemplate:
                         "contents": [
                         {
                             "type": "text",
-                            "text": "預約 - 後天",
+                            "text": "預約 - 後天(4/24 星期四)",
                             "weight": "bold",
                             "size": "xl",
                             "color": "#FF6F61"
                         },
                         {
                             "type": "text",
-                            "text": "4/24 (星期四)",
+                            "text": "可預約時段：",
                             "size": "md",
                             "color": "#666666",
                             "wrap": true
@@ -225,14 +225,14 @@ class LineBotMessageTemplate:
                         "contents": [
                         {
                             "type": "text",
-                            "text": "預約 - 大後天",
+                            "text": "預約 - 大後天(4/25 星期五)",
                             "weight": "bold",
                             "size": "xl",
                             "color": "#FF6F61"
                         },
                         {
                             "type": "text",
-                            "text": "4/25 (星期五)",
+                            "text": "可預約時段：",
                             "size": "md",
                             "color": "#666666",
                             "wrap": true
