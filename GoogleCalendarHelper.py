@@ -7,8 +7,13 @@ import pytz
 from datetime import datetime, timedelta
 
 class GoogleCalendarOperation:
+    
+    # Initialize logger
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
 
     tz = pytz.timezone("Asia/Taipei")
+    
     BOOK_EVENT_TEMPLATE = {
         'summary': '【預約】$name$，來自 LINE官方帳號',
         'location': '店內消費',
