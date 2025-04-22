@@ -135,7 +135,7 @@ class LineBotMessageTemplate:
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": {WEBHOOD_DOMAIN} + "/static/imgs/LJ_Salon_Banner.png",
+                        "url": "{WEBHOOD_DOMAIN}/static/imgs/LJ_Salon_Banner.png",
                         "size": "full",
                         "aspectRatio": "20:13",
                         "aspectMode": "cover",
