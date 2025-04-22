@@ -137,7 +137,7 @@ class LineBotMessageTemplate:
                         "contents": [
                         {
                             "type": "text",
-                            "text": "預約 - 明天",
+                            "text": "預約 - 後天",
                             "weight": "bold",
                             "size": "xl",
                             "color": "#FF6F61"
@@ -170,29 +170,6 @@ class LineBotMessageTemplate:
                                 {
                                     "type": "text",
                                     "text": "10:30",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "13:00",
-                                "data": "action=book&date=04-24&time=13:00",
-                                "displayText": "我要預約 4/24 13:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "13:00",
                                     "align": "center",
                                     "weight": "bold",
                                     "size": "lg",
@@ -262,52 +239,6 @@ class LineBotMessageTemplate:
                             "layout": "vertical",
                             "spacing": "sm",
                             "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "10:30",
-                                "data": "action=book&date=04-25&time=10:30",
-                                "displayText": "我要預約 4/25 10:30"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "10:30",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "13:00",
-                                "data": "action=book&date=04-25&time=13:00",
-                                "displayText": "我要預約 4/25 13:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "13:00",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
                             {
                                 "type": "box",
                                 "layout": "vertical",

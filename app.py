@@ -4,9 +4,9 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, FollowEvent, PostbackEvent, TextMessage, TextSendMessage, FlexSendMessage, TemplateSendMessage
 import os
 import requests
-#from bs4 import BeautifulSoup
 import logging
 import json
+from LineBotMessageTemplate import LineBotMessageTemplate
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
