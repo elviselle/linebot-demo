@@ -5,7 +5,6 @@ from linebot.models import MessageEvent, FollowEvent, PostbackEvent, TextMessage
 import os
 import requests
 import logging
-import json
 from LineBotMessageTemplate import LineBotMessageTemplate
 
 app = Flask(__name__)
@@ -59,7 +58,7 @@ def handle_message(event):
           contents=LineBotMessageTemplate().get_message_template(LineBotMessageTemplate.TYPE_CALENDAR_AVAILABLE_TIME)
       )
       logger.info(f"FlexSendMessage: {btn_msg.as_json_dict()}")
-      
+
       line_bot_api.reply_message(event.reply_token, btn_msg)
 
 # 處理 follow 事件

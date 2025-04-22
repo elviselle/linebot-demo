@@ -1,3 +1,5 @@
+import json
+
 class LineBotMessageTemplate:
 
     TYPE_CALENDAR_AVAILABLE_TIME: str = "calendar_available"
@@ -6,7 +8,7 @@ class LineBotMessageTemplate:
         pass
     def get_message_template(self, message_type):
         msg_dict = {}
-        
+
         if message_type == self.TYPE_CALENDAR_AVAILABLE_TIME:
 
             btn_message_template = """
