@@ -3,3 +3,5 @@ line-bot-sdk
 requests
 beautifulsoup4
 pytz
+google-api-python-client
+google-auth
