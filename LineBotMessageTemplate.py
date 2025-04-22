@@ -126,7 +126,53 @@ class LineBotMessageTemplate:
                                     "color": "#ffffff"
                                 }
                                 ]
-                            }
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "backgroundColor": "#FFAA88",
+                                "cornerRadius": "md",
+                                "action": {
+                                "type": "postback",
+                                "label": "17:00",
+                                "data": "action=book&date=04-23&time=17:00",
+                                "displayText": "我要預約 4/23 17:00"
+                                },
+                                "paddingAll": "md",
+                                "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "17:00",
+                                    "align": "center",
+                                    "weight": "bold",
+                                    "size": "lg",
+                                    "color": "#ffffff"
+                                }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "backgroundColor": "#FFAA88",
+                                "cornerRadius": "md",
+                                "action": {
+                                "type": "postback",
+                                "label": "18:30",
+                                "data": "action=book&date=04-23&time=18:30",
+                                "displayText": "我要預約 4/23 18:30"
+                                },
+                                "paddingAll": "md",
+                                "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "18:30",
+                                    "align": "center",
+                                    "weight": "bold",
+                                    "size": "lg",
+                                    "color": "#ffffff"
+                                }
+                                ]
+                            }                            
                             ]
                         }
                         ]
