@@ -31,12 +31,12 @@ class GoogleCalendarOperation:
     }
 
     def __init__(self):
-        SERVICE_ACCONT_KEY = os.getenv('e')
-        SERVICE_ACCONT_KEY += "=="
+        SERVICE_ACCOUNT_KEY = os.getenv('SERVICE_ACCOUNT_KEY')
+        SERVICE_ACCOUNT_KEY += "=="
         CALENDAR_ID = os.getenv('CALENDAR_ID')
         SUBJECT_EMAIL = os.getenv('SUBJECT_EMAIL')
 
-        self.service_account_key = SERVICE_ACCONT_KEY
+        self.service_account_key = SERVICE_ACCOUNT_KEY
         self.calendar_id = CALENDAR_ID
         self.subject_email = SUBJECT_EMAIL
         self.scopes = ['https://www.googleapis.com/auth/calendar']
@@ -83,6 +83,7 @@ class GoogleCalendarOperation:
         # 建立授權
         #SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
         SCOPES = ['https://www.googleapis.com/auth/calendar']
+        SERVICE_ACCOUNT_FILE = './google-service-account-key/bot-reservation-calandcar-d4b08b7cf015.json'
         CALENDAR_ID = "33c461e46a5dc03899db2fcc80feb217380a5671d30fa5bc6290deb1481e6719@group.calendar.google.com"
 
         SERVICE_ACCONT_KEY = os.getenv('SERVICE_ACCOUNT_KEY')
