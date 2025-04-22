@@ -112,8 +112,8 @@ class GoogleCalendarOperation:
 # Initialize the GoogleCalendarOperation class
 # calendar_id = "your_calendar_id_here"  # Replace with your calendar ID
 # subject_email = "your_subject_email_here"  # Replace with your subject email if needed
-google_calendar = GoogleCalendarOperation()
-google_calendar.get_upcoming_events()
+#google_calendar = GoogleCalendarOperation()
+#google_calendar.get_upcoming_events()
 
 # Test listing calendars
 #print("Listing calendars:")
