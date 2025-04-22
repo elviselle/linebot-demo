@@ -6,14 +6,20 @@ class LineBotMessageTemplate:
     TYPE_CALENDAR_AVAILABLE_TIME: str = "calendar_available"
     WEBHOOD_DOMAIN = os.getenv('WEBHOOD_DOMAIN')
 
+    # Initialize logger
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
     def __init__(self):
         pass
     def get_message_template(self, message_type):
         msg_dict = {}
 
+        logging.info(f"webhook domain: {self.WEBHOOD_DOMAIN}")
+
         if message_type == self.TYPE_CALENDAR_AVAILABLE_TIME:
 
-            btn_message_template = """
+            btn_message_template = f"""
                 {
                 "type": "carousel",
                 "contents": [
