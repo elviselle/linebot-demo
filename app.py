@@ -48,11 +48,11 @@ def handle_message(event):
     if "營業時間" in incoming_msg:
       return
 
-    elseif "取消" in incoming_msg:
+    elif "取消" in incoming_msg:
       line_bot_api.reply_message(event.reply_token, TextSendMessage(text="需要取消預約嗎？請打電話📞 02-33445566，我們會有專人幫您處理唷😊"))
       return
 
-    elseif "預約" in incoming_msg:
+    elif "預約" in incoming_msg:
       btn_msg = FlexSendMessage(
           alt_text="預約時段選擇",
           contents=btn_msg_dict)
