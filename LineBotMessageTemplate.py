@@ -19,7 +19,7 @@ class LineBotMessageTemplate:
 
         if message_type == self.TYPE_CALENDAR_AVAILABLE_TIME:
 
-            btn_message_template = f"""
+            btn_message_template = """
                 {
                 "type": "carousel",
                 "contents": [
@@ -135,7 +135,7 @@ class LineBotMessageTemplate:
                     "type": "bubble",
                     "hero": {
                         "type": "image",
-                        "url": "{WEBHOOD_DOMAIN}/static/imgs/LJ_Salon_Banner.png",
+                        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
                         "size": "full",
                         "aspectRatio": "20:13",
                         "aspectMode": "cover",
@@ -281,6 +281,7 @@ class LineBotMessageTemplate:
                 ]
                 }
                 """
+            btn_message_template = btn_message_template.replace("WEBHOOD_DOMAIN", self.WEBHOOD_DOMAIN)
             msg_dict = json.loads(btn_message_template)    
 
         return msg_dict
