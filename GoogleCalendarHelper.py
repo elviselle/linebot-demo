@@ -111,7 +111,7 @@ class GoogleCalendarOperation:
                     self.logger.info(f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}")
                 if len(events) < 2:
                     day_availables.append(hour)
-            available_hours[now.strftime('%Y-%m-%d')] = day_availables
+            available_hours[day.strftime('%Y-%m-%d')] = day_availables
         self.logger.info(f"Available hours: {available_hours}")
         return available_hours
 
