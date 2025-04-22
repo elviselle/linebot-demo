@@ -11,7 +11,7 @@ class GoogleCalendarOperation:
     tz = pytz.timezone("Asia/Taipei")
     BOOK_EVENT_TEMPLATE = {
         'summary': '【預約】$name$，來自 LINE官方帳號',
-        'location': 'Line官方帳號',
+        'location': '店內消費',
         'description': 'user_id: $user_id$',
         'start': {
             'dateTime': '$start_time$',
@@ -75,6 +75,38 @@ class GoogleCalendarOperation:
 
         created_event = self.service.events().insert(calendarId=self.calendar_id, body=event).execute()
         return created_event
+    
+    def get_upcoming_events(self, days=3):
+
+        hours = ["10:30", "13:00", "15:30"]
+        available_hours = {}
+        now = datetime.now(self.tz)
+        for i in range(1, days+1):
+            day_availables = []
+            for hour in hours:
+                dt_naive = datetime.strptime(f"{now.strftime('%Y-%m-%d')} {hour}", "%Y-%m-%d %H:%M")
+                start_time = self.tz.localize(dt_naive)
+                end_time = start_time + timedelta(hours=2)
+                
+                events_result = self.service.events().list(
+                    calendarId=self.calendar_id,
+                    timeMin=now,
+                    timeMax=max_time,
+                    singleEvents=True,
+                    orderBy='startTime'
+                ).execute()
+                events = events_result.get('items', [])
+                for event in events:
+                    event_start = event['start'].get('dateTime', event['start'].get('date'))
+                    event_end = event['end'].get('dateTime', event['end'].get('date'))
+                    event_summary = event.get('summary', 'No Title')
+                    event_description = event.get('description', 'No Description')
+                    logger.info(f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}")
+                if events.length < 2:
+                    day_availables.append(hour)
+            available_hours[now.strftime('%Y-%m-%d')] = day_availables
+        logger.info(f"Available hours: {available_hours}")
+        return available_hours
 
 
 # Initialize the GoogleCalendarOperation class

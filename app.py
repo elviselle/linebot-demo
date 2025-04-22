@@ -54,6 +54,9 @@ def handle_message(event):
 
     elif "預約" in incoming_msg:
       
+      google_calendar = GoogleCalendarOperation()
+      google_calendar.get_comming_events()
+      
       btn_msg = FlexSendMessage(
           alt_text="預約時段選擇",
           contents=LineBotMessageTemplate().get_message_template(LineBotMessageTemplate.TYPE_CALENDAR_AVAILABLE_TIME)
