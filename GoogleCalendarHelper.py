@@ -90,8 +90,8 @@ class GoogleCalendarOperation:
                 
                 events_result = self.service.events().list(
                     calendarId=self.calendar_id,
-                    timeMin=now,
-                    timeMax=max_time,
+                    timeMin=start_time,
+                    timeMax=end_time,
                     singleEvents=True,
                     orderBy='startTime'
                 ).execute()
