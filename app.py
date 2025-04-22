@@ -53,9 +53,11 @@ def handle_message(event):
       return
 
     elif "預約" in incoming_msg:
+      
       btn_msg = FlexSendMessage(
           alt_text="預約時段選擇",
-          contents=btn_msg_dict)
+          contents=LineBotMessageTemplate().get_flex_message()
+      )
       line_bot_api.reply_message(event.reply_token, btn_msg)
 
 # 處理 follow 事件
