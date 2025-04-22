@@ -102,7 +102,7 @@ class GoogleCalendarOperation:
                     event_summary = event.get('summary', 'No Title')
                     event_description = event.get('description', 'No Description')
                     logger.info(f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}")
-                if events.length < 2:
+                if len(events) < 2:
                     day_availables.append(hour)
             available_hours[now.strftime('%Y-%m-%d')] = day_availables
         logger.info(f"Available hours: {available_hours}")
