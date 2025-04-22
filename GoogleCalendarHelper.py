@@ -1,10 +1,11 @@
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
 import os
 import base64
 import json
 import pytz
+import logging
 from datetime import datetime, timedelta
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
 class GoogleCalendarOperation:
     
@@ -13,7 +14,7 @@ class GoogleCalendarOperation:
     logger = logging.getLogger(__name__)
 
     tz = pytz.timezone("Asia/Taipei")
-    
+
     BOOK_EVENT_TEMPLATE = {
         'summary': '【預約】$name$，來自 LINE官方帳號',
         'location': '店內消費',
