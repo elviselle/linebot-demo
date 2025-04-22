@@ -90,7 +90,8 @@ class GoogleCalendarOperation:
         for i in range(1, days+1):
             day_availables = []
             for hour in hours:
-                dt_naive = datetime.strptime(f"{now.strftime('%Y-%m-%d')} {hour}", "%Y-%m-%d %H:%M")
+                day = now + timedelta(days=i)
+                dt_naive = datetime.strptime(f"{day.strftime('%Y-%m-%d')} {hour}", "%Y-%m-%d %H:%M")
                 start_time = self.tz.localize(dt_naive)
                 end_time = start_time + timedelta(hours=2)
                 
