@@ -83,7 +83,6 @@ class GoogleCalendarOperation:
         # 建立授權
         #SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
         SCOPES = ['https://www.googleapis.com/auth/calendar']
-        SERVICE_ACCOUNT_FILE = './google-service-account-key/bot-reservation-calandcar-d4b08b7cf015.json'
         CALENDAR_ID = "33c461e46a5dc03899db2fcc80feb217380a5671d30fa5bc6290deb1481e6719@group.calendar.google.com"
 
         SERVICE_ACCONT_KEY = os.getenv('SERVICE_ACCOUNT_KEY')
