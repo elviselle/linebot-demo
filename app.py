@@ -45,13 +45,14 @@ def handle_message(event):
 
     # 以後可以改發送請求到 Rasa server
 
-    if incoming_msg == "營業時間":
+    if "營業時間" in incoming_msg:
       return
-      
-    elseif incoming_msg.indexof("取消") >= 0:
-      line_bot_api.reply_message(event.reply_token, TextSendMessage(text="若您想取消預約，請來電02-33445566，由專人協助您取消預約。"))
 
-    elseif incoming_msg.indexof("預約") >= 0:
+    elseif "取消" in incoming_msg:
+      line_bot_api.reply_message(event.reply_token, TextSendMessage(text="需要取消預約嗎？請打電話📞 02-33445566，我們會有專人幫您處理唷😊"))
+      return
+
+    elseif "預約" in incoming_msg:
       btn_msg = FlexSendMessage(
           alt_text="預約時段選擇",
           contents=btn_msg_dict)
