@@ -75,7 +75,9 @@ def handle_message(event):
         if len(bookded_events) > 0:
             booked_hours_str = ""
             for booked_event in bookded_events:
-                booked_hours_str += f"{datetime.strptime(booked_event, '%Y-%m-%dT%H:%M:%S').strftime('%m-%d %H:%M')}、"
+                booked_hours_str += (
+                    f"{datetime.fromisoformat(booked_event).strftime('%m-%d %H:%M')}、"
+                )
 
             line_bot_api.reply_message(
                 event.reply_token,
