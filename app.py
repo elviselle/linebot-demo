@@ -76,7 +76,8 @@ def handle_message(event):
         if has_booked:
             booked_hours_str = ""
             for booked_hour in booked_hours.keys():
-                booked_hours_str += (f"{booked_hour}：{', '.join(booked_hour + " " + booked_hours[booked_hour])}\n")
+                for hour in booked_hours[booked_hour]:
+                    booked_hours_str += f"{booked_hour} {hour}、"
 
             line_bot_api.reply_message(
                 event.reply_token,
