@@ -79,7 +79,7 @@ def handle_message(event):
         weekday_map = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
 
         for available_hour in availables_hours.keys():
-            mm_dd = datetime.strptime(available_hour, "%Y-%m-%d").strftime("%m-%d")
+            mm_dd = datetime.strptime(available_hour, "%Y-%m-%d").strftime("%m/%d")
             weekday = weekday_map[
                 datetime.strptime(available_hour, "%Y-%m-%d").weekday()
             ]
@@ -90,7 +90,7 @@ def handle_message(event):
             bubble["hero"]["url"] = bubble["hero"]["url"].replace(
                 "WEBHOOD_DOMAIN", os.getenv("WEBHOOD_DOMAIN")
             )
-            bubble["body"]["contents"][0]["text"] = f"預約 {available_hour} {weekday}"
+            bubble["body"]["contents"][0]["text"] = f"預約 {mm_dd} {weekday}"
             hours = availables_hours[available_hour]
             for hour in hours:
                 box = LineBotMessageTemplate().get_message_template(
