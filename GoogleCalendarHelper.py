@@ -85,7 +85,7 @@ class GoogleCalendarOperation:
             .insert(calendarId=self.calendar_id, body=event)
             .execute()
         )
-        self.logger.info(f"Created Event: {created_event}")
+        # self.logger.info(f"Created Event: {created_event}")
         return created_event
 
     def get_upcoming_events(self, user_id, days=3):
