@@ -69,15 +69,13 @@ def handle_message(event):
     elif "預約" in incoming_msg:
 
         google_calendar = GoogleCalendarOperation()
-        availables_hours, has_booked, booked_hours = (
-            google_calendar.get_upcoming_events(user_id)
-        )
 
-        if has_booked:
+        bookded_events = google_calendar.query_upcoming_events_by_user(user_id)
+
+        if len(bookded_events) > 0:
             booked_hours_str = ""
-            for booked_hour in booked_hours.keys():
-                for hour in booked_hours[booked_hour]:
-                    booked_hours_str += f"{datetime.strptime(booked_hour, '%Y-%m-%d').strftime('%m-%d')} {hour}、"
+            for booked_event in bookded_events:
+                booked_hours_str += f"{booked_event}、"
 
             line_bot_api.reply_message(
                 event.reply_token,
@@ -87,6 +85,7 @@ def handle_message(event):
             )
             return
 
+        availables_hours = google_calendar.get_upcoming_events(user_id)
         carousel = LineBotMessageTemplate().get_message_template(
             LineBotMessageTemplate.TYPE_CALENDAR_AVAILABLE_TIME
         )

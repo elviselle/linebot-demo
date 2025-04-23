@@ -138,6 +138,42 @@ class GoogleCalendarOperation:
         self.logger.info(f"Available hours: {available_hours}")
         return available_hours, has_booked, booked_hours
 
+    def query_upcoming_events_by_user(self, user_id, days=3):
+        booked_hours = []
+        tomorrow = datetime.now(self.tz) + timedelta(days=1)
+        start_time = tomorrow.replace(
+            hour=0, minute=0, second=0, microsecond=0
+        ).isoformat()
+        end_time = (
+            (tomorrow + timedelta(days=(days - 1)))
+            .replace(hour=0, minute=0, second=0, microsecond=0)
+            .isoformat()
+        )
+
+        events_result = (
+            self.service.events()
+            .list(
+                calendarId=self.calendar_id,
+                timeMin=start_time,
+                timeMax=end_time,
+                q="{user_id}",
+                singleEvents=True,
+                orderBy="startTime",
+            )
+            .execute()
+        )
+        for event in events_result.get("items", []):
+            event_start = event["start"].get("dateTime", event["start"].get("date"))
+            event_end = event["end"].get("dateTime", event["end"].get("date"))
+            event_summary = event.get("summary", "No Title")
+            event_description = event.get("description", "No Description")
+            booked_hours.append(event_start)
+            # if user_id in event_description:
+            #     self.logger.info(
+            #         f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}"
+            #     )
+        return booked_hours
+
 
 # Initialize the GoogleCalendarOperation class
 # calendar_id = "your_calendar_id_here"  # Replace with your calendar ID
