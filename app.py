@@ -238,10 +238,12 @@ def handle_postback(event):
             },
         }
 
-        line_bot_api.reply_message(
-            event.reply_token,
-            FlexSendMessage(alt_text="確認預約", contents=confirm_dict),
+        flex_msg = FlexSendMessage(
+            alt_text="確認預約",
+            contents=confirm_dict,
         )
+        logger.info(f"FlexSendMessage: {flex_msg.as_json_dict()}")
+        line_bot_api.reply_message(event.reply_token, flex_msg)
 
         # google_calendar = GoogleCalendarOperation()
         # google_calendar.create_event(
