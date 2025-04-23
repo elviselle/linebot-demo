@@ -71,7 +71,6 @@ def handle_message(event):
         google_calendar = GoogleCalendarOperation()
 
         bookded_events = google_calendar.query_upcoming_events_by_user(user_id)
-
         if len(bookded_events) > 0:
             booked_hours_str = ""
             for booked_event in bookded_events:
@@ -111,6 +110,7 @@ def handle_message(event):
             )
             bubble["body"]["contents"][0]["text"] = f"預約 {mm_dd} {weekday}"
             hours = availables_hours[available_hour]
+            nowstr = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             for hour in hours:
                 box = LineBotMessageTemplate().get_message_template(
                     LineBotMessageTemplate.TYPE_BOX
@@ -118,10 +118,7 @@ def handle_message(event):
                 box["contents"][0]["action"]["label"] = hour
                 box["contents"][0]["action"][
                     "data"
-                ] = f"action=book&date={available_hour}&time={hour}"
-                box["contents"][0]["action"][
-                    "data"
-                ] = f"action=book&date={available_hour}&time={hour}"
+                ] = f"action=book&date={available_hour}&time={hour}&issue_time={nowstr}"
                 # box["contents"][0]["action"]["displayText"] = f"我要預約 {mm_dd} {hour}"
                 box["contents"][0]["contents"][0]["text"] = hour
 
@@ -162,6 +159,16 @@ def handle_postback(event):
     if postback_data.startswith("action=book"):
         parts = dict(item.split("=") for item in postback_data.split("&"))
 
+        # check issue_time < 5分鐘
+        issue_time = datetime.strptime(parts["issue_time"], "%Y-%m-%d %H:%M:%S")
+        if (datetime.now() - issue_time).total_seconds() > 300:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="按鈕效期已過，請重新點選單的「我要預約」"),
+            )
+            return
+
+        nowstr = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         confirm_dict = confirm_dict = {
             "type": "bubble",
             "body": {
@@ -193,7 +200,9 @@ def handle_postback(event):
                                     "data": "action=confirm&date="
                                     + parts["date"]
                                     + "&time="
-                                    + parts["time"],
+                                    + parts["time"]
+                                    + "&issue_time="
+                                    + nowstr,
                                     "displayText": "是",
                                 },
                                 "style": "primary",
@@ -231,6 +240,15 @@ def handle_postback(event):
     elif postback_data.startswith("action=confirm"):
         parts = dict(item.split("=") for item in postback_data.split("&"))
 
+        # check issue_time < 5分鐘
+        issue_time = datetime.strptime(parts["issue_time"], "%Y-%m-%d %H:%M:%S")
+        if (datetime.now() - issue_time).total_seconds() > 300:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="按鈕效期已過，請重新點選單的「我要預約」"),
+            )
+            return
+
         line_bot_api.push_message(
             user_id,
             TextSendMessage(text=f"後台預約中..."),
@@ -246,17 +264,6 @@ def handle_postback(event):
             ),
         )
 
-
-#    if postback_data == 'book_haircut':
-#        line_bot_api.reply_message(
-#            event.reply_token,
-#            TextSendMessage(text="你選擇了預約剪髮 💇‍♂️")
-#        )
-#    elif postback_data == 'check_service':
-#        line_bot_api.reply_message(
-#            event.reply_token,
-#            TextSendMessage(text="以下是我們的服務項目 💈")
-#        )
 
 if __name__ == "__main__":
 
