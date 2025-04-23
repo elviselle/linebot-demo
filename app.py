@@ -119,7 +119,7 @@ def handle_message(event):
                 box["contents"][0]["action"][
                     "data"
                 ] = f"action=book&date={available_hour}&time={hour}"
-                box["contents"][0]["action"]["displayText"] = f"我要預約 {mm_dd} {hour}"
+                # box["contents"][0]["action"]["displayText"] = f"我要預約 {mm_dd} {hour}"
                 box["contents"][0]["contents"][0]["text"] = hour
 
                 bubble["body"]["contents"][2]["contents"].append(box)
@@ -212,7 +212,7 @@ def handle_postback(event):
             alt_text="確認預約",
             contents=confirm_dict,
         )
-        logger.info(f"FlexSendMessage: {flex_msg.as_json_dict()}")
+        # logger.info(f"FlexSendMessage: {flex_msg.as_json_dict()}")
         line_bot_api.reply_message(event.reply_token, flex_msg)
 
         # google_calendar = GoogleCalendarOperation()
@@ -221,6 +221,20 @@ def handle_postback(event):
         # )
 
         # 可以根據 data 做不同邏輯
+
+    elif postback_data.startswith("action=confirm"):
+        parts = dict(item.split("=") for item in postback_data.split("&"))
+
+        google_calendar = GoogleCalendarOperation()
+        created_event = google_calendar.create_event(
+            display_name, user_id, parts["date"], parts["time"]
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(
+                text=f"預約成功！{parts['date']} {parts['time']}，期待為您服務！"
+            ),
+        )
 
 
 #    if postback_data == 'book_haircut':
