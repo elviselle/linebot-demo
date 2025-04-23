@@ -159,82 +159,51 @@ def handle_postback(event):
     if postback_data.startswith("action=book"):
         parts = dict(item.split("=") for item in postback_data.split("&"))
 
-        confirm_dict = {
-            "type": "flex",
-            "altText": "請選擇",
-            "contents": {
-                "type": "bubble",
-                "body": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "spacing": "lg",
-                    "contents": [
-                        {
-                            "type": "text",
-                            "text": "你確定要預約 "
-                            + parts["date"]
-                            + " "
-                            + parts["time"]
-                            + " 嗎？",
-                            "wrap": True,
-                            "weight": "bold",
-                            "size": "md",
-                            "color": "#333333",
-                            "align": "center",
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "spacing": "md",
-                            "contents": [
-                                {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "flex": 1,
-                                    "backgroundColor": "#FFAA88",
-                                    "cornerRadius": "md",
-                                    "action": {
-                                        "type": "message",
-                                        "label": "是",
-                                        "text": "是",
-                                    },
-                                    "paddingAll": "md",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": "是",
-                                            "color": "#ffffff",
-                                            "align": "center",
-                                            "weight": "bold",
-                                        }
-                                    ],
+        confirm_dict = confirm_dict = {
+            "type": "bubble",
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "md",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "你確定要預約"
+                        + parts["date"]
+                        + " "
+                        + parts["time"]
+                        + " 嗎？",
+                        "weight": "bold",
+                        "size": "lg",
+                        "wrap": True,
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "spacing": "md",
+                        "contents": [
+                            {
+                                "type": "button",
+                                "action": {
+                                    "type": "message",
+                                    "label": "是",
+                                    "text": "是",
                                 },
-                                {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "flex": 1,
-                                    "backgroundColor": "#FFAA88",
-                                    "cornerRadius": "md",
-                                    "action": {
-                                        "type": "message",
-                                        "label": "否",
-                                        "text": "否",
-                                    },
-                                    "paddingAll": "md",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": "否",
-                                            "color": "#ffffff",
-                                            "align": "center",
-                                            "weight": "bold",
-                                        }
-                                    ],
+                                "style": "primary",
+                                "color": "#FFAA88",
+                            },
+                            {
+                                "type": "button",
+                                "action": {
+                                    "type": "message",
+                                    "label": "否",
+                                    "text": "否",
                                 },
-                            ],
-                        },
-                    ],
-                },
+                                "style": "secondary",
+                            },
+                        ],
+                    },
+                ],
             },
         }
 
