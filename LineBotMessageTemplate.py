@@ -78,7 +78,6 @@ class LineBotMessageTemplate:
                             "type": "postback",
                             "label": "10:30",
                             "data": "action=book&date=2025-04-23&time=10:30",
-                            """ "displayText": "我要預約 4/23 10:30"," """
                         },
                         "paddingAll": "md",
                         "contents": [
