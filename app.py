@@ -70,7 +70,7 @@ def handle_message(event):
 
         google_calendar = GoogleCalendarOperation()
         availables_hours, has_booked, booked_hours = (
-            google_calendar.get_upcoming_events()
+            google_calendar.get_upcoming_events(user_id)
         )
 
         if has_booked:
