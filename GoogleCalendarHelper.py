@@ -91,7 +91,7 @@ class GoogleCalendarOperation:
     def get_upcoming_events(self, user_id, days=3):
 
         has_booked = False
-        hours = ["10:00", "13:00", "15:00", "17:00", "18:30"]
+        hours = ["10:00", "13:00", "15:00", "17:00"]
         available_hours = {}
         booked_hours = {}
         now = datetime.now(self.tz)
