@@ -156,7 +156,7 @@ class GoogleCalendarOperation:
                 calendarId=self.calendar_id,
                 timeMin=start_time,
                 timeMax=end_time,
-                q="{user_id}",
+                q=user_id,
                 singleEvents=True,
                 orderBy="startTime",
             )

@@ -260,7 +260,7 @@ def handle_postback(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
-                text=f"預約成功！您預約的時段為 {datetime.strptime(parts['date'], '%Y-%m-%d').strftime('%m/%d')} {parts['time']}，期待為您服務！"
+                text=f"預約成功！您預約的時段為 {datetime.strptime(parts['date'], '%Y-%m-%d').strftime('%m/%d')} {parts['time']}，期待為您服務！若您要取消或改期，請來電02-33445566，我們會有專人為您處理唷😊"
             ),
         )
 
