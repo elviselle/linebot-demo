@@ -158,10 +158,95 @@ def handle_postback(event):
 
     if postback_data.startswith("action=book"):
         parts = dict(item.split("=") for item in postback_data.split("&"))
-        google_calendar = GoogleCalendarOperation()
-        google_calendar.create_event(
-            display_name, user_id, parts["date"], parts["time"]
+
+        confirm_dict = {
+            "type": "flex",
+            "altText": "請選擇",
+            "contents": {
+                "type": "bubble",
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "lg",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "你確定要預約 "
+                            + parts["date"]
+                            + " "
+                            + parts["time"]
+                            + " 嗎？",
+                            "wrap": True,
+                            "weight": "bold",
+                            "size": "md",
+                            "color": "#333333",
+                            "align": "center",
+                        },
+                        {
+                            "type": "box",
+                            "layout": "horizontal",
+                            "spacing": "md",
+                            "contents": [
+                                {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "flex": 1,
+                                    "backgroundColor": "#FFAA88",
+                                    "cornerRadius": "md",
+                                    "action": {
+                                        "type": "message",
+                                        "label": "是",
+                                        "text": "是",
+                                    },
+                                    "paddingAll": "md",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "是",
+                                            "color": "#ffffff",
+                                            "align": "center",
+                                            "weight": "bold",
+                                        }
+                                    ],
+                                },
+                                {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "flex": 1,
+                                    "backgroundColor": "#FFAA88",
+                                    "cornerRadius": "md",
+                                    "action": {
+                                        "type": "message",
+                                        "label": "否",
+                                        "text": "否",
+                                    },
+                                    "paddingAll": "md",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "否",
+                                            "color": "#ffffff",
+                                            "align": "center",
+                                            "weight": "bold",
+                                        }
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            },
+        }
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            FlexSendMessage(alt_text="確認預約", contents=confirm_dict),
         )
+
+        # google_calendar = GoogleCalendarOperation()
+        # google_calendar.create_event(
+        #     display_name, user_id, parts["date"], parts["time"]
+        # )
 
         # 可以根據 data 做不同邏輯
 
