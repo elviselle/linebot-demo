@@ -52,7 +52,6 @@ class LineBotMessageTemplate:
                             "text": "可預約時段：",
                             "size": "md",
                             "color": "#666666",
-                            "wrap": "true",
                         },
                         {
                             "type": "box",
