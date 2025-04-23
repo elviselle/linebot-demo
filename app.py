@@ -77,7 +77,7 @@ def handle_message(event):
             booked_hours_str = ""
             for booked_hour in booked_hours.keys():
                 for hour in booked_hours[booked_hour]:
-                    booked_hours_str += f"{booked_hour} {hour}、"
+                    booked_hours_str += f"{datetime.strptime(booked_hour, '%Y-%m-%d').strftime('%m-%d')} {hour}、"
 
             line_bot_api.reply_message(
                 event.reply_token,
