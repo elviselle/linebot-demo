@@ -69,7 +69,24 @@ def handle_message(event):
     elif "預約" in incoming_msg:
 
         google_calendar = GoogleCalendarOperation()
-        availables_hours = google_calendar.get_upcoming_events()
+        availables_hours, has_booked, booked_hours = (
+            google_calendar.get_upcoming_events()
+        )
+
+        if has_booked:
+            booked_hours_str = ""
+            for booked_hour in booked_hours.keys():
+                booked_hours_str += (
+                    f"{booked_hour}：{', '.join(booked_hour + " " + booked_hours[booked_hour])}\n"
+                )
+
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(
+                    text=f"你已經預約過了，預約時間為：{booked_hours_str}，若您想更改預約時間，請來電02-33445566有專人為您改期唷！"
+                ),
+            )
+            return
 
         carousel = LineBotMessageTemplate().get_message_template(
             LineBotMessageTemplate.TYPE_CALENDAR_AVAILABLE_TIME
