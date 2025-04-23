@@ -228,8 +228,8 @@ def handle_postback(event):
     elif postback_data.startswith("action=confirm"):
         parts = dict(item.split("=") for item in postback_data.split("&"))
 
-        line_bot_api.reply_message(
-            event.reply_token,
+        line_bot_api.push_message(
+            user_id,
             TextSendMessage(text=f"後台預約中..."),
         )
         google_calendar = GoogleCalendarOperation()
