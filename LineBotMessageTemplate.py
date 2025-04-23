@@ -5,6 +5,8 @@ import logging
 class LineBotMessageTemplate:
 
     TYPE_CALENDAR_AVAILABLE_TIME: str = "calendar_available"
+    TYPE_BUBBLE: str = "calendar_bubble"
+    TYPE_BOX: str = "calendar_box"
     WEBHOOD_DOMAIN = os.getenv('WEBHOOD_DOMAIN')
 
     # Initialize logger
@@ -19,26 +21,27 @@ class LineBotMessageTemplate:
         # logging.info(f"webhook domain: {self.WEBHOOD_DOMAIN}")
 
         if message_type == self.TYPE_CALENDAR_AVAILABLE_TIME:
-
-            btn_message_template = """
-                {
+            msg_dict = 
+            {
                 "type": "carousel",
-                "contents": [
-                    {
-                    "type": "bubble",
-                    "hero": {
-                        "type": "image",
-                        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
-                        "size": "full",
-                        "aspectRatio": "20:13",
-                        "aspectMode": "cover",
-                        "backgroundColor": "#FFEAE0"
-                    },
-                    "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "spacing": "lg",
-                        "contents": [
+                "contents": []
+            }
+        elif message_type == self.TYPE_BUBBLE:
+            bubble = {
+                "type": "bubble",
+                "hero": {
+                    "type": "image",
+                    "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
+                    "size": "full",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "cover",
+                    "backgroundColor": "#FFEAE0"
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "lg",
+                    "contents": [
                         {
                             "type": "text",
                             "text": "預約 - 明天(4/23 星期三)",
@@ -58,277 +61,138 @@ class LineBotMessageTemplate:
                             "layout": "vertical",
                             "spacing": "sm",
                             "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "10:30",
-                                "data": "action=book&date=04-23&time=10:30",
-                                "displayText": "我要預約 4/23 10:30"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "10:30",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "13:00",
-                                "data": "action=book&date=04-23&time=13:00",
-                                "displayText": "我要預約 4/23 13:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "13:00",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "15:00",
-                                "data": "action=book&date=04-23&time=15:00",
-                                "displayText": "我要預約 4/23 15:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "15:00",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "17:00",
-                                "data": "action=book&date=04-23&time=17:00",
-                                "displayText": "我要預約 4/23 17:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "17:00",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "18:30",
-                                "data": "action=book&date=04-23&time=18:30",
-                                "displayText": "我要預約 4/23 18:30"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "18:30",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            }                            
                             ]
                         }
-                        ]
-                    }
-                    },
-                {
-                    "type": "bubble",
-                    "hero": {
-                        "type": "image",
-                        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
-                        "size": "full",
-                        "aspectRatio": "20:13",
-                        "aspectMode": "cover",
-                        "backgroundColor": "#FFEAE0"
-                    },
-                    "body": {
+                    ]
+                }
+            }
+            msg_dict = bubble
+        elif message_type == self.TYPE_BOX:
+            box = {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                    {
                         "type": "box",
                         "layout": "vertical",
-                        "spacing": "lg",
+                        "backgroundColor": "#FFAA88",
+                        "cornerRadius": "md",
+                        "action": {
+                        "type": "postback",
+                        "label": "10:30",
+                        "data": "action=book&date=2025-04-23&time=10:30",
+                        "displayText": "我要預約 4/23 10:30"
+                        },
+                        "paddingAll": "md",
                         "contents": [
                         {
                             "type": "text",
-                            "text": "預約 - 後天(4/24 星期四)",
+                            "text": "10:30",
+                            "align": "center",
                             "weight": "bold",
-                            "size": "xl",
-                            "color": "#FF6F61"
-                        },
-                        {
-                            "type": "text",
-                            "text": "可預約時段：",
-                            "size": "md",
-                            "color": "#666666",
-                            "wrap": true
-                        },
-                        {
-                            "type": "box",
-                            "layout": "vertical",
-                            "spacing": "sm",
-                            "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "10:30",
-                                "data": "action=book&date=04-24&time=10:30",
-                                "displayText": "我要預約 4/24 10:30"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "10:30",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "15:00",
-                                "data": "action=book&date=04-24&time=15:00",
-                                "displayText": "我要預約 4/24 15:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "15:00",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            }
-                            ]
+                            "size": "lg",
+                            "color": "#ffffff"
                         }
                         ]
-                    }
-                    },
-                {
-                    "type": "bubble",
-                    "hero": {
-                        "type": "image",
-                        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
-                        "size": "full",
-                        "aspectRatio": "20:13",
-                        "aspectMode": "cover",
-                        "backgroundColor": "#FFEAE0"
-                    },
-                    "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "spacing": "lg",
-                        "contents": [
-                        {
-                            "type": "text",
-                            "text": "預約 - 大後天(4/25 星期五)",
-                            "weight": "bold",
-                            "size": "xl",
-                            "color": "#FF6F61"
-                        },
-                        {
-                            "type": "text",
-                            "text": "可預約時段：",
-                            "size": "md",
-                            "color": "#666666",
-                            "wrap": true
-                        },
-                        {
-                            "type": "box",
-                            "layout": "vertical",
-                            "spacing": "sm",
-                            "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "backgroundColor": "#FFAA88",
-                                "cornerRadius": "md",
-                                "action": {
-                                "type": "postback",
-                                "label": "15:00",
-                                "data": "action=book&date=04-25&time=15:00",
-                                "displayText": "我要預約 4/25 15:00"
-                                },
-                                "paddingAll": "md",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "15:00",
-                                    "align": "center",
-                                    "weight": "bold",
-                                    "size": "lg",
-                                    "color": "#ffffff"
-                                }
-                                ]
-                            }
-                            ]
-                        }
-                        ]
-                    }
                     }
                 ]
-                }
-                """
-            btn_message_template = btn_message_template.replace("WEBHOOD_DOMAIN", self.WEBHOOD_DOMAIN)
-            msg_dict = json.loads(btn_message_template)    
-
+            }
+            msg_dict = box
         return msg_dict
+
+
+
+"""bubble =
+{
+    "type": "bubble",
+    "hero": {
+        "type": "image",
+        "url": "WEBHOOD_DOMAIN/static/imgs/LJ_Salon_Banner.png",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "backgroundColor": "#FFEAE0"
+    },
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "lg",
+        "contents": [
+            {
+                "type": "text",
+                "text": "預約 - 明天(4/23 星期三)",
+                "weight": "bold",
+                "size": "xl",
+                "color": "#FF6F61"
+            },
+            {
+                "type": "text",
+                "text": "可預約時段：",
+                "size": "md",
+                "color": "#666666",
+                "wrap": true
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "backgroundColor": "#FFAA88",
+                    "cornerRadius": "md",
+                    "action": {
+                    "type": "postback",
+                    "label": "10:30",
+                    "data": "action=book&date=04-23&time=10:30",
+                    "displayText": "我要預約 4/23 10:30"
+                    },
+                    "paddingAll": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "10:30",
+                        "align": "center",
+                        "weight": "bold",
+                        "size": "lg",
+                        "color": "#ffffff"
+                    }
+                    ]
+                }
+            }
+        ]
+    }
+}"""
+
+"""box = {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+        {
+            "type": "box",
+            "layout": "vertical",
+            "backgroundColor": "#FFAA88",
+            "cornerRadius": "md",
+            "action": {
+            "type": "postback",
+            "label": "10:30",
+            "data": "action=book&date=2025-04-23&time=10:30",
+            "displayText": "我要預約 4/23 10:30"
+            },
+            "paddingAll": "md",
+            "contents": [
+            {
+                "type": "text",
+                "text": "10:30",
+                "align": "center",
+                "weight": "bold",
+                "size": "lg",
+                "color": "#ffffff"
+            }
+            ]
+        }
+    ]
+}"""

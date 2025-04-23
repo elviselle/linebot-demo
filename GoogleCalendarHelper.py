@@ -84,7 +84,7 @@ class GoogleCalendarOperation:
     
     def get_upcoming_events(self, days=3):
 
-        hours = ["10:30", "13:00", "15:30"]
+        hours = ["10:00", "13:00", "15:00", "17:00", "18:30"]
         available_hours = {}
         now = datetime.now(self.tz)
         for i in range(1, days+1):
@@ -108,7 +108,7 @@ class GoogleCalendarOperation:
                     event_end = event['end'].get('dateTime', event['end'].get('date'))
                     event_summary = event.get('summary', 'No Title')
                     event_description = event.get('description', 'No Description')
-                    self.logger.info(f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}")
+                    self.logger.debug(f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}")
                 if len(events) < 2:
                     day_availables.append(hour)
             available_hours[day.strftime('%Y-%m-%d')] = day_availables
