@@ -75,12 +75,12 @@ def handle_message(event):
         if len(bookded_events) > 0:
             booked_hours_str = ""
             for booked_event in bookded_events:
-                booked_hours_str += f"{datetime.strptime(booked_event, "%Y-%m-%dT%H:%M:%S").strftime("%m-%d %H:%M")}、"
+                booked_hours_str += f"{datetime.strptime(booked_event, '%Y-%m-%dT%H:%M:%S').strftime('%m-%d %H:%M')}、"
 
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(
-                    text=f"你已經預約過了，預約時間為：{booked_hours_str}，若您想更改預約時間，請來電02-33445566有專人為您改期唷！"
+                    text=f"你已經預約過了，預約時間為：{booked_hours_str} 若您想更改預約時間，請來電02-33445566有專人為您改期唷！"
                 ),
             )
             return
