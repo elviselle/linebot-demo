@@ -96,11 +96,16 @@ def handle_message(event):
                 box = LineBotMessageTemplate().get_message_template(
                     LineBotMessageTemplate.TYPE_BOX
                 )
-                box["contents"][0]["label"] = hour
-                box["contents"][0][
+                box["contents"][0]["action"]["label"] = hour
+                box["contents"][0]["action"][
                     "data"
                 ] = f"action=book&date={available_hour}&time={hour}"
+                box["contents"][0]["action"][
+                    "data"
+                ] = f"action=book&date={available_hour}&time={hour}"
+                box["contents"][0]["action"]["displayText"] = f"我要預約 {mm_dd} {hour}"
                 box["contents"][0]["contents"][0]["text"] = hour
+
                 bubble["body"]["contents"][2]["contents"].append(box)
 
             carousel["contents"].append(bubble)
