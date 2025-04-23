@@ -95,7 +95,7 @@ def handle_message(event):
         # 2. 判斷星期幾（回傳中文）
         weekday_map = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
 
-        for available_hour in availables_hours.keys():
+        for available_hour in availables_hours[0].keys():
             mm_dd = datetime.strptime(available_hour, "%Y-%m-%d").strftime("%m/%d")
             weekday = weekday_map[
                 datetime.strptime(available_hour, "%Y-%m-%d").weekday()
