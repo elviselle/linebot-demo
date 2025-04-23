@@ -187,7 +187,10 @@ def handle_postback(event):
                                 "action": {
                                     "type": "postback",
                                     "label": "是",
-                                    "data": "action=confirm&date=2025-04-23&time=10:30",
+                                    "data": "action=confirm&date="
+                                    + parts["date"]
+                                    + "&time="
+                                    + parts["time"],
                                     "displayText": "是",
                                 },
                                 "style": "primary",
@@ -225,6 +228,10 @@ def handle_postback(event):
     elif postback_data.startswith("action=confirm"):
         parts = dict(item.split("=") for item in postback_data.split("&"))
 
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=f"後台預約中..."),
+        )
         google_calendar = GoogleCalendarOperation()
         created_event = google_calendar.create_event(
             display_name, user_id, parts["date"], parts["time"]
