@@ -87,7 +87,9 @@ def handle_message(event):
             )
             return
 
-        availables_hours = google_calendar.get_upcoming_events(user_id)
+        availables_hours, has_booked, booked_hours = (
+            google_calendar.get_upcoming_events(user_id)
+        )
         carousel = LineBotMessageTemplate().get_message_template(
             LineBotMessageTemplate.TYPE_CALENDAR_AVAILABLE_TIME
         )
@@ -95,7 +97,7 @@ def handle_message(event):
         # 2. 判斷星期幾（回傳中文）
         weekday_map = ["(一)", "(二)", "(三)", "(四)", "(五)", "(六)", "(日)"]
 
-        for available_hour in availables_hours[0].keys():
+        for available_hour in availables_hours.keys():
             mm_dd = datetime.strptime(available_hour, "%Y-%m-%d").strftime("%m/%d")
             weekday = weekday_map[
                 datetime.strptime(available_hour, "%Y-%m-%d").weekday()
