@@ -185,9 +185,10 @@ def handle_postback(event):
                             {
                                 "type": "button",
                                 "action": {
-                                    "type": "message",
+                                    "type": "postback",
                                     "label": "是",
-                                    "text": "是",
+                                    "data": "action=confirm&date=2025-04-23&time=10:30",
+                                    "displayText": "是",
                                 },
                                 "style": "primary",
                                 "color": "#FFAA88",
