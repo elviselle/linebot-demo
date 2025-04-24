@@ -1,6 +1,8 @@
 import os
 import base64
 import json
+import html
+import re
 import pytz
 import logging
 from datetime import datetime, timedelta
@@ -113,7 +115,13 @@ class GoogleCalendarOperation:
                 f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}"
             )
             try:
-                app_config = json.loads(event_description)
+
+                # 去除 HTML 標籤
+                des = re.sub(r"<[^>]*>", "", event_description)
+                # 去除多餘空白與 decode HTML entities
+                des = html.unescape(des.strip())
+
+                app_config = json.loads(des)
             except json.JSONDecodeError as e:
                 self.logger.error(f"Failed to decode event description as JSON: {e}")
                 app_config = {}
