@@ -244,6 +244,7 @@ class GoogleCalendarOperation:
         for event in events_result.get("items", []):
             event_summary = event.get("summary", "No Title")
             if staff in event_summary:
+                self.logger.info(f"Event: {event_summary}")
                 event_start = event["start"].get("dateTime", event["start"].get("date"))
                 event_date = datetime.strptime(event_start[:10], "%Y-%m-%d")
                 dueoffs.append(event_date.strftime("%d/%m"))
