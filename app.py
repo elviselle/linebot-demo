@@ -28,11 +28,11 @@ LINE_CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
+staffs = []
+time_sheets = []
+booking_day_range = 3
 
-class GlobalConfig:
-    staffs = []
-    time_sheets = []
-    booking_day_range = 3
+google_calendar = None
 
 
 @app.route("/callback", methods=["POST"])
@@ -73,8 +73,6 @@ def handle_message(event):
         return
 
     elif "預約" in incoming_msg:
-
-        google_calendar = GoogleCalendarOperation()
 
         bookded_events = google_calendar.query_upcoming_events_by_user(user_id)
         if len(bookded_events) > 0:
@@ -275,12 +273,14 @@ if __name__ == "__main__":
     google_calendar = GoogleCalendarOperation()
     app_config = google_calendar.get_config_event()
 
-    GlobalConfig.staffs = app_config["staffs"]
-    GlobalConfig.time_sheets = app_config["time_sheets"]
-    GlobalConfig.booking_day_range = app_config["booking_day_range"]
+    staffs = app_config["staffs"]
+    time_sheets = app_config["time_sheets"]
+    booking_day_range = app_config["booking_day_range"]
 
-    logger.info(f"staffs: {GlobalConfig.staffs}")
-    logger.info(f"time_sheets: {GlobalConfig.time_sheets}")
-    logger.info(f"booking_day_range: {GlobalConfig.booking_day_range}")
+    logger.info(f"staffs: {staffs}")
+    logger.info(f"time_sheets: {time_sheets}")
+    logger.info(f"booking_day_range: {booking_day_range}")
+
+    google_calendar = GoogleCalendarOperation(time_sheets)
 
     app.run(host="0.0.0.0", port=5000)

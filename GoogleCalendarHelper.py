@@ -6,7 +6,6 @@ import logging
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-from app import GlobalConfig
 
 
 class GoogleCalendarOperation:
@@ -38,12 +37,13 @@ class GoogleCalendarOperation:
         },
     }
 
-    def __init__(self):
+    def __init__(self, time_sheets=["10:00"]):
         SERVICE_ACCOUNT_KEY = os.getenv("SERVICE_ACCOUNT_KEY")
         SERVICE_ACCOUNT_KEY += "=="
         CALENDAR_ID = os.getenv("CALENDAR_ID")
         SUBJECT_EMAIL = os.getenv("SUBJECT_EMAIL")
 
+        self.time_sheets = time_sheets
         self.service_account_key = SERVICE_ACCOUNT_KEY
         self.calendar_id = CALENDAR_ID
         self.subject_email = SUBJECT_EMAIL
@@ -122,7 +122,7 @@ class GoogleCalendarOperation:
     def get_upcoming_events(self, user_id, days=3):
 
         has_booked = False
-        hours = GlobalConfig.time_sheets
+        hours = self.time_sheets
         available_hours = {}
         booked_hours = {}
         now = datetime.now(self.tz)
