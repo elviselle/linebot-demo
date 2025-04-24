@@ -275,7 +275,7 @@ if __name__ == "__main__":
 
     staffs = app_config["staffs"]
     time_sheets = app_config["timesheets"]
-    booking_day_range = app_config["booking_dayrange"]
+    booking_day_range = app_config["bookingdayrange"]
 
     logger.info(f"staffs: {staffs}")
     logger.info(f"time_sheets: {time_sheets}")
