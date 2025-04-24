@@ -146,7 +146,7 @@ def handle_message(event):
                 + "的排休時間為：\n"
                 + ", ".join(
                     [
-                        datetime.fromisoformat(dueoff).strftime("%m/%d %H:%M")
+                        datetime.fromisoformat(dueoff).strftime("%m/%d")
                         for dueoff in dueoffs
                     ]
                 )
