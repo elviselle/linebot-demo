@@ -94,7 +94,7 @@ class GoogleCalendarOperation:
             .list(
                 calendarId=self.calendar_id,
                 timeMin="2020-01-01T00:00:00+08:00",
-                timeMax="2020-01-01T01:00:00+08:00",
+                timeMax="2020-01-02T01:00:00+08:00",
                 q="Config",
                 singleEvents=True,
                 orderBy="startTime",
