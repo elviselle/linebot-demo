@@ -274,8 +274,8 @@ if __name__ == "__main__":
     app_config = google_calendar.get_config_event()
 
     staffs = app_config["staffs"]
-    time_sheets = app_config["time_sheets"]
-    booking_day_range = app_config["booking_day_range"]
+    time_sheets = app_config["timesheets"]
+    booking_day_range = app_config["booking_dayrange"]
 
     logger.info(f"staffs: {staffs}")
     logger.info(f"time_sheets: {time_sheets}")
