@@ -222,12 +222,13 @@ class GoogleCalendarOperation:
             day=1, hour=0, minute=0, second=0, microsecond=0
         ).isoformat()
 
-        last_day_of_next_month = (now.replace(day=1) + timedelta(days=32)).replace(
+        last_day_of_next_month = (now.replace(day=1) + timedelta(days=63)).replace(
             day=1
         ) - timedelta(days=1)
         end_time = last_day_of_next_month.replace(
             hour=23, minute=59, second=59, microsecond=999999
         ).isoformat()
+
         self.logger.info(f"query range: {first_day_of_month} ~ end_time: {end_time}")
         events_result = (
             self.service.events()
