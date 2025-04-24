@@ -25,9 +25,12 @@ logger = logging.getLogger(__name__)
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 
-
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
+
+staffs = []
+time_sheets = []
+booking_day_range = 3
 
 
 @app.route("/callback", methods=["POST"])
@@ -269,5 +272,12 @@ def handle_postback(event):
 if __name__ == "__main__":
     google_calendar = GoogleCalendarOperation()
     app_config = google_calendar.get_config_event()
-    logger.info(f"app_config: {app_config}")
+
+    staffs = app_config["staffs"]
+    time_sheets = app_config["time_sheets"]
+    booking_day_range = app_config["booking_day_range"]
+    logger.info(f"staffs: {staffs}")
+    logger.info(f"time_sheets: {time_sheets}")
+    logger.info(f"booking_day_range: {booking_day_range}")
+
     app.run(host="0.0.0.0", port=5000)
