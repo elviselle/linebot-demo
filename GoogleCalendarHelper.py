@@ -89,7 +89,7 @@ class GoogleCalendarOperation:
         return created_event
 
     def get_config_event(self):
-        events_result = (f
+        events_result = (
             self.service.events()
             .list(
                 calendarId=self.calendar_id,
