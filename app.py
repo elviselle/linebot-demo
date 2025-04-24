@@ -144,12 +144,7 @@ def handle_message(event):
             TextSendMessage(
                 text=staff
                 + "的排休時間為：\n"
-                + ", ".join(
-                    [
-                        datetime.fromisoformat(dueoff).strftime("%m/%d")
-                        for dueoff in dueoffs
-                    ]
-                )
+                + ", ".join([dueoff for dueoff in dueoffs])
             ),
         )
 

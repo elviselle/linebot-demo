@@ -247,7 +247,7 @@ class GoogleCalendarOperation:
                 self.logger.info(f"Event: {event_summary}")
                 event_start = event["start"].get("dateTime", event["start"].get("date"))
                 event_date = datetime.strptime(event_start[:10], "%Y-%m-%d")
-                dueoffs.append(event_date.strftime("%d/%m"))
+                dueoffs.append(event_date.strftime("%m/%d"))
 
         return dueoffs
 
