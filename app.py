@@ -128,7 +128,7 @@ def handle_message(event):
             carousel["contents"].append(bubble)
 
         flex_msg = FlexSendMessage(alt_text="預約時段選擇", contents=carousel)
-        logger.info(f"FlexSendMessage: {flex_msg.as_json_dict()}")
+        # logger.info(f"FlexSendMessage: {flex_msg.as_json_dict()}")
 
         line_bot_api.reply_message(event.reply_token, flex_msg)
 
