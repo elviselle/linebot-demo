@@ -17,6 +17,7 @@ from LineBotMessageTemplate import LineBotMessageTemplate
 from GoogleCalendarHelper import GoogleCalendarOperation
 
 app = Flask(__name__)
+app_config = None
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -266,5 +267,7 @@ def handle_postback(event):
 
 
 if __name__ == "__main__":
-
+    google_calendar = GoogleCalendarOperation()
+    app_config = google_calendar.get_config_event()
+    logger.info(f"app_config: {app_config}")
     app.run(host="0.0.0.0", port=5000)

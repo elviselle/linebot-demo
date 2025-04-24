@@ -88,6 +88,36 @@ class GoogleCalendarOperation:
         # self.logger.info(f"Created Event: {created_event}")
         return created_event
 
+    def get_config_event(self):
+        events_result = (f
+            self.service.events()
+            .list(
+                calendarId=self.calendar_id,
+                timeMin="2020-01-01T00:00:00+08:00",
+                timeMax="2020-01-01T01:00:00+08:00",
+                q="Config",
+                singleEvents=True,
+                orderBy="startTime",
+            )
+            .execute()
+        )
+        events = events_result.get("items", [])
+        app_config = {}
+        for event in events:
+            event_start = event["start"].get("dateTime", event["start"].get("date"))
+            event_end = event["end"].get("dateTime", event["end"].get("date"))
+            event_summary = event.get("summary", "No Title")
+            event_description = event.get("description", "No Description")
+            self.logger.info(
+                f"Event: {event_summary}, Start: {event_start}, End: {event_end}, Description: {event_description}"
+            )
+            try:
+                app_config = json.loads(event_description)
+            except json.JSONDecodeError as e:
+                self.logger.error(f"Failed to decode event description as JSON: {e}")
+                app_config = {}
+        return app_config
+
     def get_upcoming_events(self, user_id, days=3):
 
         has_booked = False
