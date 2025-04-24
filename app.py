@@ -135,6 +135,24 @@ def handle_message(event):
 
         line_bot_api.reply_message(event.reply_token, flex_msg)
 
+    elif "排休:" in incoming_msg:
+        parts = [item for item in incoming_msg.split(":")]
+        staff = parts[1].strip()
+        dueoffs = google_calendar.query_offdue_staff_this2month(staff)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(
+                text=staff
+                + "的排休時間為：\n"
+                + ", ".join(
+                    [
+                        datetime.fromisoformat(dueoff).strftime("%m/%d %H:%M")
+                        for dueoff in dueoffs
+                    ]
+                )
+            ),
+        )
+
 
 # 處理 follow 事件
 @handler.add(FollowEvent)

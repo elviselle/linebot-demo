@@ -213,6 +213,43 @@ class GoogleCalendarOperation:
             #     )
         return booked_hours
 
+    def query_offdue_staff_this2month(self, staff):
+
+        dueoffs = []
+
+        now = datetime.now(self.tz)
+        first_day_of_month = now.replace(
+            day=1, hour=0, minute=0, second=0, microsecond=0
+        ).isoformat()
+
+        last_day_of_next_month = (now.replace(day=1) + timedelta(days=32)).replace(
+            day=1
+        ) - timedelta(days=1)
+        end_time = last_day_of_next_month.replace(
+            hour=23, minute=59, second=59, microsecond=999999
+        ).isoformat()
+
+        events_result = (
+            self.service.events()
+            .list(
+                calendarId=self.calendar_id,
+                timeMin=first_day_of_month,
+                timeMax=end_time,
+                q="休",
+                singleEvents=True,
+                orderBy="startTime",
+            )
+            .execute()
+        )
+        for event in events_result.get("items", []):
+            event_summary = event.get("summary", "No Title")
+            if staff in event_summary:
+                event_start = event["start"].get("dateTime", event["start"].get("date"))
+                event_date = datetime.strptime(event_start[:10], "%Y-%m-%d")
+                dueoffs.append(event_date.strftime("%d/%m"))
+
+        return dueoffs
+
 
 # Initialize the GoogleCalendarOperation class
 # calendar_id = "your_calendar_id_here"  # Replace with your calendar ID
