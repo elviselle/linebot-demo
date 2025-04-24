@@ -228,7 +228,7 @@ class GoogleCalendarOperation:
         end_time = last_day_of_next_month.replace(
             hour=23, minute=59, second=59, microsecond=999999
         ).isoformat()
-
+        self.logger.info(f"query range: {first_day_of_month} ~ end_time: {end_time}")
         events_result = (
             self.service.events()
             .list(
