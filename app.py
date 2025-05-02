@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 import logging
-from flask import Flask, request, abort
+from flask import Flask, request, abort, send_from_directory
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (
@@ -34,6 +34,10 @@ booking_day_range = 3
 
 google_calendar = None
 
+# 把 / 導到 static/home.html
+@app.route('/')
+def root():
+    return send_from_directory(app.static_folder, 'home.html')
 
 @app.route("/callback", methods=["POST"])
 def callback():
