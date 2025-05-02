@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>千流數位科技</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .banner {
+      position: relative;
+      background: url('./imgs/banner.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+    }
+    .banner-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-section {
+      padding: 2rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .hero-section img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    @media (min-width: 768px) {
+      .hero-section .row {
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-4" style="max-width: 85%;">
+    <!-- Banner 區塊 -->
+    <div class="banner">
+      <div class="banner-content">
+        <h1 class="display-4"><strong>千流數位科技</strong></h1>
+        <p>VastFlow Digital Technology</p>
+        <p class="lead"><strong>提供企業最完整的社群媒體官方帳號設置與代管服務，助您提高顧客互動，提升品牌價值。</strong></p>
+      </div>
+    </div>
+
+    <div id="hero-list">
+      <!-- JS 產生 Hero 區塊 -->
+    </div>
+  </div>
+
+  <script>
+    const heroData = [
+      {
+        title: "LINE官方帳號設置與管理",
+        text: "從帳號設立到功能設定，全方位協助企業快速建立品牌專屬LINE官方帳號，強化與顧客的互動與黏著。無論是設定自定義功能、管理客戶資料，還是制定精確的顧客群體分類，我們都能提供專業指導，幫助企業建立與顧客長期穩定的聯繫。透過簡單的步驟，您將擁有專屬的LINE平台，成為顧客的首選聯繫通路。",
+        imgSrc: `./imgs/line-logo.jpg`
+      },
+      {
+        title: "自動應答機器人",
+        text: "設計專屬自動應答機器人，即使在非營業時間或繁忙時段，也能根據設定快速回應顧客需求，提升服務效率與顧客滿意度。這不僅能夠降低人力成本，還能確保顧客在任何時候都能得到即時回應，從而增強顧客的滿意度和忠誠度。無論是FAQ問題還是訂單查詢，機器人都能迅速準確地提供解答，讓顧客無需等待。",
+        imgSrc: `./imgs/message-bot.jpg`
+      },
+      {
+        title: "圖文行銷推播訊息",
+        text: "協助企業製作具吸引力的圖文行銷內容，透過LINE推播功能，將新產品、限時優惠、節慶活動直接送達顧客，提高互動率並直接帶動銷售。藉由設計精美的圖文訊息，您能夠讓顧客在最短時間內了解最新動態，增加曝光機會並促進消費。根據顧客的興趣和偏好，將訊息精準推送，讓行銷效果事半功倍。",
+        imgSrc: `./imgs/push-message.jpg`
+      },
+      {
+        title: "時段預約自助服務",
+        text: "時段預約系統提供透過LINE自動應答完成的預約自助服務，顧客可直接在線上選擇服務時段、預訂項目，系統自動整理預約資訊，業主端可直接在日曆 app 查看當日與未來的消費者預約狀況，有效簡化管理流程、減少人工作業負擔。",
+        imgSrc: `./imgs/calendar.jpg`
+      }
+    ];
+
+    const heroList = document.querySelector('#hero-list');
+
+    heroData.forEach((hero, i) => {
+      const isEven = (i + 1) % 2 === 0;
+      const heroSection = document.createElement('section');
+      heroSection.className = 'hero-section';
+      heroSection.innerHTML = `
+        <div class="row ${isEven ? 'flex-lg-row-reverse' : ''}">
+          <div class="col-12 col-lg-7 mb-3 mb-lg-0">
+            <img src="${hero.imgSrc}" alt="Hero ${i + 1}" loading="lazy" class="img-fluid">
+          </div>
+          <div class="col-12 col-lg-5">
+            <h2>${hero.title}</h2>
+            <p class="fs-5">${hero.text}</p>
+          </div>
+        </div>
+      `;
+      heroList.appendChild(heroSection);
+    });
+  </script>
+</body>
+</html>
+
