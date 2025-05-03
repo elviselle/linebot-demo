@@ -43,9 +43,9 @@ def cronjob():
     url = 'hhttps://linebot-demo-gw9a.onrender.com/'  # 你要請求的網址
     try:
         response = requests.get(url)
-        print(f"成功請求 {url}，狀態碼：{response.status_code}")
+        logger.info(f"成功請求 {url}，狀態碼：{response.status_code}")
     except requests.exceptions.RequestException as e:
-        print(f"請求出錯：{e}")
+        logger.error(f"請求出錯：{e}")
 
 
 # 把 / 導到 static/home.html
