@@ -43,7 +43,7 @@ def cronjob():
     # 發送 GET 請求
     try:
         response = requests.get(HOME_URL)
-        logger.info(f"成功請求 {url}，狀態碼：{response.status_code}")
+        logger.info(f"成功請求 $HOME_URL，狀態碼：{response.status_code}")
     except requests.exceptions.RequestException as e:
         logger.error(f"請求出錯：{e}")
 
