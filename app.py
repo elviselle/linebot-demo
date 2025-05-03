@@ -15,6 +15,7 @@ from linebot.models import (
 )
 from LineBotMessageTemplate import LineBotMessageTemplate
 from GoogleCalendarHelper import GoogleCalendarOperation
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 app_config = None
@@ -33,6 +34,19 @@ time_sheets = []
 booking_day_range = 3
 
 google_calendar = None
+
+
+import requests
+
+def cronjob():
+    # 發送 GET 請求
+    url = 'hhttps://linebot-demo-gw9a.onrender.com/'  # 你要請求的網址
+    try:
+        response = requests.get(url)
+        print(f"成功請求 {url}，狀態碼：{response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"請求出錯：{e}")
+
 
 # 把 / 導到 static/home.html
 @app.route('/')
@@ -284,6 +298,15 @@ def handle_postback(event):
                 text=f"預約成功！您預約的時段為 {datetime.strptime(parts['date'], '%Y-%m-%d').strftime('%m/%d')} {parts['time']}，期待為您服務！若您要取消或改期，請來電02-33445566，我們會有專人為您處理唷😊"
             ),
         )
+
+# 初始化非阻塞的背景調度器
+scheduler = BackgroundScheduler()
+
+# 設定一個每 1 分鐘執行的任務
+scheduler.add_job(cronjob, 'interval', minutes=10)
+
+# 啟動調度器
+scheduler.start()
 
 
 if __name__ == "__main__":
