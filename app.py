@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 # 從環境變數讀取憑證
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
+HOME_URL = os.getenv("HOME_URL")
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
@@ -40,9 +41,8 @@ import requests
 
 def cronjob():
     # 發送 GET 請求
-    url = 'hhttps://linebot-demo-gw9a.onrender.com/'  # 你要請求的網址
     try:
-        response = requests.get(url)
+        response = requests.get(HOME_URL)
         logger.info(f"成功請求 {url}，狀態碼：{response.status_code}")
     except requests.exceptions.RequestException as e:
         logger.error(f"請求出錯：{e}")
