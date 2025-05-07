@@ -26,9 +26,14 @@ logger = logging.getLogger(__name__)
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
 HOME_URL = os.getenv("HOME_URL")
+INVEST_CHANNEL_ACCESS_TOKEN = os.getenv("INVEST_CHANNEL_ACCESS_TOKEN")
+INVEST_CHANNEL_SECRET = os.getenv("INVEST_CHANNEL_SECRET")
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
+
+line_bot_api2 = LineBotApi(INVEST_CHANNEL_ACCESS_TOKEN)
+handler2 = WebhookHandler(INVEST_CHANNEL_SECRET)
 
 staffs = []
 time_sheets = []
@@ -52,6 +57,7 @@ def cronjob():
 @app.route('/')
 def root():
     return send_from_directory(app.static_folder, 'home.html')
+
 
 @app.route("/callback", methods=["POST"])
 def callback():
@@ -298,6 +304,36 @@ def handle_postback(event):
                 text=f"預約成功！您預約的時段為 {datetime.strptime(parts['date'], '%Y-%m-%d').strftime('%m/%d')} {parts['time']}，期待為您服務！若您要取消或改期，請來電02-33445566，我們會有專人為您處理唷😊"
             ),
         )
+
+
+
+
+@app.route("/investcallback", methods=["POST"])
+def investcallback():
+    signature = request.headers["X-Line-Signature"]
+    body = request.get_data(as_text=True)
+
+    try:
+        handler2.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+    return "OK"
+
+
+@handler2.add(MessageEvent, message=TextMessage)
+def handle2_message(event):
+    user_id = event.source.user_id
+    user_message = event.message.text
+
+    logger.info(f"使用者 ID: {user_id}")
+    logger.info(f"使用者說: {user_message}")
+
+    incoming_msg = event.message.text
+    line_bot_api2.reply_message(
+        event.reply_token,
+        TextSendMessage(text=f"你說了: {incoming_msg}")
+    )
+
 
 # 初始化非阻塞的背景調度器
 scheduler = BackgroundScheduler()
